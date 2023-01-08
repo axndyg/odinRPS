@@ -53,11 +53,10 @@ function getPlayerChoice(userChoice) {
     return lowered;
 }
 
-function playRound(userChoice) { 
+function playRound(userChoice, compChoice) { 
     // console.log(`${compChoice} and ${userChoice}`);
     let result = "tie"; 
-    let compChoice = getComputerChoice();
-
+  
     if (userChoice == "rock") {
         if (compChoice == "paper") { result = "loss"; }
         else if (compChoice == "scissors") { result = "win"; }
@@ -75,25 +74,67 @@ function playRound(userChoice) {
 /* Div Updates */
 const content = document.querySelector('.content')
 const matchRecap = document.createElement('div');
+    matchRecap.style.cssText = 'margin-bottom: 20px';
+    
+const gameRecap = document.createElement('p');
+    gameRecap.style.cssText = 'font-weight: bolder; text-align: center; font-size: 26px;';
 
-/* Values */
-const plyrScore = document.querySelector('.tick-p');
+/* DOM Values */
+const plyrDisplay = document.querySelector('.tick-p');
     let pScore = 0;
-const compChoice = document.querySelector('.tick-c');
+const compDisplay = document.querySelector('.tick-c');
     let cScore = 0;
 
 const rock_btn = document.querySelector('#rock_btn');
 rock_btn.addEventListener('click', () => { 
-    console.log("rock");
-    plyrScore.textContent = `${++pScore}`;
+    game('rock');
 });
 
 const paper_btn = document.querySelector('#paper_btn');
 paper_btn.addEventListener('click', () => {
-    console.log('paper');
+   game('paper');
 });
 
 const scissors_btn = document.querySelector('#scissors_btn');
 scissors_btn.addEventListener('click', () => { 
-    console.log('scissors');
+    game('scissors'); 
 });
+
+const reset_btn = document.querySelector('#reset'); 
+reset_btn.addEventListener('click', () => { 
+    pScore = 0;
+    cScore = 0;
+    plyrDisplay.textContent = `${pScore}`;
+    compDisplay.textContent = `${cScore}`;
+    content.removeChild(matchRecap);
+});
+
+/* Game Function */
+function game(plyrChoice) { 
+    
+    if (pScore == 5 || cScore == 5) return;
+
+    let compChoice = getComputerChoice(); 
+    let result = playRound(plyrChoice, compChoice);
+
+    if (result == 'win') { 
+        plyrDisplay.textContent = `${++pScore}`;
+    }
+    else if (result == 'loss') { 
+        compDisplay.textContent = `${++cScore}`;
+    }
+
+    matchRecap.textContent = `You picked ${plyrChoice} and the computer picked ${compChoice} resulting in a: ${result}`;
+   
+    if (pScore == 5) { 
+        gameRecap.textContent += 'You win overall!';
+        matchRecap.appendChild(gameRecap);
+    }
+    else if (cScore == 5) { 
+        gameRecap.textContent += 'The computer wins overall!';
+        matchRecap.appendChild(gameRecap);
+    }
+
+
+    content.insertBefore(matchRecap, reset_btn);
+}
