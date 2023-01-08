@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>ROCK PAPER SCISSORS</title>
-        <script src="./script.js"></script>
+        <script src="./script.js" defer></script>
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
@@ -12,7 +12,33 @@
             <div class="t-o">PAPER</div>
             <div class="t-o">SCISSORS</div>
         </div>
-        <div class="content">holding</div>
-        <div class="footer">holding footer</div>
+        <div class="content">
+            <div class="buttons">
+                <button id="rock_btn">
+                    <img src="./graphics/rock.png" width="150px" height="150px">
+                </button>
+                <button id="paper_btn">
+                    <img src="./graphics/paper.png" width="150px" height="150px">
+                </button>
+                <button id="scissors_btn" class="scissors">
+                    <img src="./graphics/scissors.png" width="200px" height="150px">
+                </button>
+            </div>  
+            <div class="score">
+                <div class="s-player">
+                    PLAYER SCORE
+                    <p class="tick-p">0</p>
+                </div>
+                <div class="s-comp">
+                    COMPUTER SCORE
+                    <p class="tick-c">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="f-text">
+                Andres Gutierrez Ⓒ <a href="https://www.theodinproject.com/" target="_blank">The Odin Project</a>
+            </div>
+        </div>
     </body>
 </html>

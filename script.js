@@ -53,9 +53,10 @@ function getPlayerChoice(userChoice) {
     return lowered;
 }
 
-function playRound(compChoice, userChoice) { 
+function playRound(userChoice) { 
     // console.log(`${compChoice} and ${userChoice}`);
     let result = "tie"; 
+    let compChoice = getComputerChoice();
 
     if (userChoice == "rock") {
         if (compChoice == "paper") { result = "loss"; }
@@ -70,30 +71,29 @@ function playRound(compChoice, userChoice) {
 
     return result; 
 }
+ 
+/* Div Updates */
+const content = document.querySelector('.content')
+const matchRecap = document.createElement('div');
 
-function game() { 
-    let compWins = 0; 
-    let plyrWins = 0; 
+/* Values */
+const plyrScore = document.querySelector('.tick-p');
+    let pScore = 0;
+const compChoice = document.querySelector('.tick-c');
+    let cScore = 0;
 
-    while (compWins < 5 && plyrWins < 5) { 
-        let compResponse = getComputerChoice(); 
-        let plyrResponse = getPlayerChoice(prompt("Enter your choice (RPS): "));
+const rock_btn = document.querySelector('#rock_btn');
+rock_btn.addEventListener('click', () => { 
+    console.log("rock");
+    plyrScore.textContent = `${++pScore}`;
+});
 
-        let result = playRound(compResponse, plyrResponse); 
-        console.log(`The computer picked ${compResponse} and you picked ${plyrResponse} resulting in a`);
-        if (result == "tie") { console.log(" tie!")}
-        else if (result == "win") { 
-            console.log(" win for you!");
-            plyrWins++;
-        }
-        else {
-            console.log(" win for the computer!");
-            compWins++;
-        }
-        console.log(`Computer Score: ${compWins}`);
-        console.log(`Player Score  : ${plyrWins}`);
-    }
+const paper_btn = document.querySelector('#paper_btn');
+paper_btn.addEventListener('click', () => {
+    console.log('paper');
+});
 
-    if (compWins >= 5) { console.log("The computer won overall!"); }
-    else { console.log("You won overall!"); }
-}
+const scissors_btn = document.querySelector('#scissors_btn');
+scissors_btn.addEventListener('click', () => { 
+    console.log('scissors');
+});
