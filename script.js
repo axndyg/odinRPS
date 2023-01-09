@@ -74,7 +74,7 @@ function playRound(userChoice, compChoice) {
 /* Div Updates */
 const content = document.querySelector('.content')
 const matchRecap = document.createElement('div');
-    matchRecap.style.cssText = 'margin-bottom: 20px';
+    matchRecap.style.cssText = 'margin-bottom: 20px; font-weight: 100; font-size: 18px;';
     
 const gameRecap = document.createElement('p');
     gameRecap.style.cssText = 'font-weight: bolder; text-align: center; font-size: 26px;';
@@ -127,11 +127,11 @@ function game(plyrChoice) {
     matchRecap.textContent = `You picked ${plyrChoice} and the computer picked ${compChoice} resulting in a: ${result}`;
    
     if (pScore == 5) { 
-        gameRecap.textContent += 'You win overall!';
+        gameRecap.textContent = 'You win overall!';
         matchRecap.appendChild(gameRecap);
     }
     else if (cScore == 5) { 
-        gameRecap.textContent += 'The computer wins overall!';
+        gameRecap.textContent = 'The computer wins overall!';
         matchRecap.appendChild(gameRecap);
     }
 
